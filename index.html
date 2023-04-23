@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic 8-Ball</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Franklin">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Click the Magic 8-Ball to get your fortune</h1>
+        <div class="eight-ball" id="eightBall">
+            <div class="response" id="response"></div>
+        </div>
+        <div class="input-wrapper">
+            <label for="user-input">Ask your question:</label>
+            <input type="text" id="user-input" placeholder="Type your question here">
+        </div>
+        <div class="button-wrapper">
+            <button id="clear-button">Clear</button>
+        </div>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Response</th>
+                </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

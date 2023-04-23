@@ -1,0 +1,161 @@
+body, html {
+    margin: 0;
+    background-color: #1c1d21;
+    font-family: "Libre Franklin", sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.eight-ball {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    min-height: 300px;
+    background-image: url('8ball_image.jpg'); /* Provide your own 8-ball image */
+    background-size: cover;
+    cursor: pointer;
+    animation: 1s shake linear infinite;
+    animation-play-state: paused;
+    transition: transform 0.4s;
+}
+
+.eight-ball:hover {
+  transform: scaleX(1.25);
+  cursor: pointer;
+}
+
+.response {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    display: block;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-2px, -2px) rotate(-2deg); }
+    20% { transform: translate(-4px, 0px) rotate(2deg); }
+    30% { transform: translate(2px, 4px) rotate(0deg); }
+    40% { transform: translate(2px, -2px) rotate(2deg); }
+    50% { transform: translate(-2px, 4px) rotate(-2deg); }
+    60% { transform: translate(-2px, 2px) rotate(0deg); }
+    70% { transform: translate(4px, 2px) rotate(-2deg); }
+    80% { transform: translate(-2px, -2px) rotate(2deg); }
+    90% { transform: translate(4px, 4px) rotate(0deg); }
+    100% { transform: translate(2px, -4px) rotate(-2deg); }
+}
+
+@keyframes shakeShort {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    25% { transform: translate(-1px, -1px) rotate(-1deg); }
+    50% { transform: translate(-1px, 1px) rotate(1deg); }
+    75% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg); }
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type="text"]::placeholder {
+    color: #9aa2c2;
+}
+
+input[type="text"]:focus, button:hover {
+    box-shadow: 0 0 10px #4e76ff;
+}
+
+input[type="text"], button {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid gray;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    width: auto;
+    border: 1px solid gray;
+}
+
+    
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+}
+
+tr {
+    background-color: white;
+}
+
+label {
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
