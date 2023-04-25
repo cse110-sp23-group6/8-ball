@@ -1,7 +1,7 @@
 // Get DOM elements
 const eightBall = document.getElementById("eightBall");
-const clickSound = new Audio('media/909crsh.wav'); /* Provide your own click sound file */
-const crashSound = new Audio('media/click_sound.mp3');
+const crashSound = new Audio('media/909crsh.wav'); /* Provide your own click sound file */
+const clickSound = new Audio('media/click_sound.mp3');
 const input = document.getElementById("user-input");
 const responseElement = document.getElementById("response");
 const clearButton = document.getElementById("clear-button");
@@ -37,7 +37,9 @@ const responses = [
     'Very doubtful.'
 ];
 
-// Clear all timeouts
+/**
+ * Function that clears timeouts of the events that occured 
+ */
 function clearTimeouts() {
     for (let i = 0; i < timeouts.length; i++) {
         clearTimeout(timeouts[i]);
@@ -45,19 +47,30 @@ function clearTimeouts() {
     timeouts = [];
 }
 
-// Get a random response
+/**
+ * Function that generates a random number up to the number of different 8-ball
+ * responses and then retrieves one of those responses. 
+ * 
+ * @returns - A response for the 8-ball to be stored and shown to the user.
+ */
 function getAnswer() {
     const randomIndex = Math.floor(Math.random() * responses.length);
     return responses[randomIndex];
 }
 
-// Update the response text with a random answer
+/**
+ * Function that updates the text displayed on the 8-ball with the randomly
+ * generated response.
+ */
 function updateResponseText() {
     const responseElement = document.getElementById("response");
     responseElement.innerText = getAnswer();
 }
 
-// Cycle through responses to simulate randomization
+/**
+ * Function that cycles through different responses display on the 8-ball to
+ * simulate randomization.
+ */
 function cycleResponses() {
     const interval = 100;
     const duration = 1000;
@@ -78,7 +91,10 @@ function cycleResponses() {
     }, interval);
 }
 
-// Short shake animation
+/**
+ * Function that animates the 8-ball image to shake slightly when there is no
+ * user input.
+ */
 function shakeBallShort() {
     eightBall.style.animation = "0.1s shakeShort linear infinite";
     timeouts.push(
@@ -88,7 +104,13 @@ function shakeBallShort() {
     );
 }
 
-// Save question and response to local storage
+/**
+ * Function that takes in the user input and the generated response and stores
+ * both in the results table and the localStorage object.
+ * 
+ * @param question - The user input
+ * @param response - The generated response
+ */
 function writeToLocalStorage(question, response) {
     history.push({
         question: question,
@@ -97,7 +119,13 @@ function writeToLocalStorage(question, response) {
     localStorage.setItem(HISTORY_LOCAL_STORAGE_KEY, JSON.stringify(history));
 }
 
-// Append a new row to the results table
+/**
+ * Function that takes in the user input and the generated response and displays
+ * it on the results table.
+ * 
+ * @param question - The user input 
+ * @param response - The generated response
+ */
 function appendResultRow(question, response) {
     const resultsBody = document.getElementById("results-body");
     const newRow = resultsBody.insertRow(0);
@@ -107,7 +135,12 @@ function appendResultRow(question, response) {
     responseCell.innerText = response;
 }
 
-// This function starts the shaking animation of the 8-ball, and determines whether to use a long or short shake duration based on whether or not the user has entered a question.
+/**
+ * Function that shakes the 8-ball and either plays the short animation if there
+ * was no user input or the long animation if there was input.
+ * 
+ * @param userInput - The user input
+ */
 function shakeBall(userInput) {
     let shakeDuration = LONG_SHAKE_DURATION;
     eightBall.style.animationPlayState = "running";
@@ -119,7 +152,9 @@ function shakeBall(userInput) {
         cycleResponses();
     }
 
-    // Adds a timeout to pause the shaking animation after the appropriate shake duration has elapsed.
+    /* Adds a timeout to pause the shaking animation after the appropriate shake
+     duration has elapsed. 
+     */
     timeouts.push(
         setTimeout(() => {
             eightBall.style.animationPlayState = "paused";
@@ -127,7 +162,9 @@ function shakeBall(userInput) {
     );
 }
 
-// This event listener is triggered when the user clicks on the 8-ball image.
+/**
+ * Event listener is triggered when the user clicks on the 8-ball image.
+ */
 eightBall.addEventListener('click', () => {
     clickSound.pause();
     crashSound.pause();
@@ -137,7 +174,8 @@ eightBall.addEventListener('click', () => {
     // Gets the user's question from the input element on the page.
     let userInput = document.getElementById("user-input").value;
 
-    // If the user hasn't entered a question, displays an error message and clears it after a short delay.
+    /* If the user hasn't entered a question, displays an error message and 
+        clears it after a short delay. */
     if (userInput === "") {
         const responseElement = document.getElementById("response");
 
@@ -163,7 +201,10 @@ eightBall.addEventListener('click', () => {
     shakeBall(userInput);
 });
 
-// This function clears the table of past results.
+/**
+ * Function that clears the results table containing previous results which also
+ * updates localStorage.
+ */
 function clearTable() {
     const resultsBody = document.getElementById("results-body");
 
@@ -177,12 +218,18 @@ function clearTable() {
     localStorage.setItem(HISTORY_LOCAL_STORAGE_KEY, JSON.stringify(history));
 }
 
-// This event listener is triggered when the clear button is clicked.
+/**
+ * This even listener is triggered when the clear button is clicked.
+ */
 clearButton.addEventListener("click", clearTable);
 
-// This function is called when the page loads.
+/**
+ * Function that is called when the page loads which retrieves information
+ * stored in local storage.
+ */
 window.onload = function () {
-    // Loads the history array from local storage, or initializes it to an empty array if there is no data in local storage.
+    /* Loads the history array from local storage, or initializes it to an empty
+    array if there is no data in local storage. */
     let loadedHistory = localStorage.getItem(HISTORY_LOCAL_STORAGE_KEY);
     if (loadedHistory == null) {
         history = [];
