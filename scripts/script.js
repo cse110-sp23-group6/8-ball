@@ -1,7 +1,7 @@
 // Get DOM elements
 const eightBall = document.getElementById("eightBall");
 const clickSound = new Audio('media/909crsh.wav'); /* Provide your own click sound file */
-const crashSound = new Audio('media/click_sound.wav');
+const crashSound = new Audio('media/click_sound.mp3');
 const input = document.getElementById("user-input");
 const responseElement = document.getElementById("response");
 const clearButton = document.getElementById("clear-button");
