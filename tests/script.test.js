@@ -12,6 +12,7 @@ const dom = new JSDOM(html, { runScripts: "dangerously", resources: "usable" });
 const { window } = dom;
 const { document } = window;
 
+// Create mock audio and localstorage so that Jest doesn't give an error
 const mocks = {
     Audio: {
         pause: jest.fn(),
@@ -24,6 +25,7 @@ const mocks = {
     }
 }
 
+// Add our mock implementations to global object
 global.Audio = jest.fn().mockImplementation(() => ({
     pause: mocks.Audio.pause,
     play: mocks.Audio.play,
@@ -34,11 +36,11 @@ global.window = window;
 
 global.localStorage = mocks.localStorage;
 
+// Get our responses array
 const { responses } = require("../scripts/script");
 
 // Eval the script to have access to the functions
 eval(script);
-
 
 // Test suite
 describe("Magic 8-Ball web app", () => {
@@ -71,8 +73,11 @@ describe("Magic 8-Ball web app", () => {
     });
 
     test("appendResultRow adds a new row to the results table", () => {
+        // Get our current results body
         const resultsBody = document.getElementById("results-body");
         const initialRowCount = resultsBody.rows.length;
+
+        // Add question-response to results
         const question = "Test question";
         const response = "Test response";
         appendResultRow(question, response);
