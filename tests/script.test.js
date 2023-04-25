@@ -29,15 +29,22 @@ global.Audio = jest.fn().mockImplementation(() => ({
     play: mocks.Audio.play,
 }))
 
+global.document = document;
+global.window = window;
+
 global.localStorage = mocks.localStorage;
-  
+
+const { responses } = require("../scripts/script");
+
 // Eval the script to have access to the functions
 eval(script);
+
 
 // Test suite
 describe("Magic 8-Ball web app", () => {
     beforeAll(async () => {
-        await page.goto("http://localhost:8080"); // Replace with the URL where your web app is running
+        page = await browser.newPage();
+        await page.goto("http://localhost:8080");
     });
 
     test("has expected elements", () => {
