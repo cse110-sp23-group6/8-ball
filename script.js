@@ -8,6 +8,8 @@ const responseElement = document.getElementById("response");
 const SHORT_SHAKE_DURATION = 200;
 const LONG_SHAKE_DURATION = 1000;
 
+const HISTORY_LOCAL_STORAGE_KEY = "history";
+
 let timeouts = [];
 
 const responses = [
@@ -32,6 +34,8 @@ const responses = [
     'Outlook not so good.',
     'Very doubtful.'
 ];
+
+let history = [];
 
 const clearButton = document.getElementById("clear-button");
 
@@ -69,6 +73,7 @@ function cycleResponses() {
             crashSound.play();
             let userInput = document.getElementById("user-input").value;
             appendResultRow(userInput, responseElement.innerText);
+            writeToLocalStorage(userInput, responseElement.innerText);
         }
     }, interval);
 }
@@ -82,6 +87,14 @@ function shakeBallShort() {
     );
 }
 
+function writeToLocalStorage(question, response) {
+    history.push({
+        question: question,
+        response: response
+    });
+
+    localStorage.setItem(HISTORY_LOCAL_STORAGE_KEY, JSON.stringify(history));
+}
 
 function appendResultRow(question, response) {
     const resultsBody = document.getElementById("results-body");
@@ -90,7 +103,7 @@ function appendResultRow(question, response) {
     const responseCell = newRow.insertCell(1);
     questionCell.innerText = question;
     responseCell.innerText = response;
-}        
+}
 
 function shakeBall(userInput) {
     let shakeDuration = LONG_SHAKE_DURATION;
@@ -146,6 +159,23 @@ function clearTable() {
     const resultsBody = document.getElementById("results-body");
     while (resultsBody.firstChild) {
         resultsBody.firstChild.remove();
+    }
+
+    history = [];
+    localStorage.setItem(HISTORY_LOCAL_STORAGE_KEY, JSON.stringify(history));
+}
+
+window.onload = function() {
+    let loadedHistory = localStorage.getItem(HISTORY_LOCAL_STORAGE_KEY);
+    if (loadedHistory == null) {
+        history = [];
+        localStorage.setItem(HISTORY_LOCAL_STORAGE_KEY, JSON.stringify(history));
+    } else {
+        history = JSON.parse(loadedHistory);
+
+        history.map((historyItem) => {
+            appendResultRow(historyItem.question, historyItem.response);
+        })
     }
 }
 
