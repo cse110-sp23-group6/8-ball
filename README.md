@@ -20,7 +20,7 @@
  - A table storing previous questions and corresponding fortune.
  - Once the site is closed and open it back up the 8-Ball still contains the previous questions and corresponding fortunes.
 ### Animation
-- The 8-ball shakes and cycles through the responses after the us
+- The 8-ball shakes and cycles through the responses after the user inputs a yes/no question. 
 - If you forget or don't put in a question, the 8-ball picture will shake slightly. 
 - The 8-ball picture has sound effects when you click on it and also after you get your fortune. 
 - If you click on the 8-ball picture without inputting your questions, then it returns "Please enter your question".  
