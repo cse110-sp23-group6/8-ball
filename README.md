@@ -4,6 +4,11 @@
   - Step 2: Hover your mouse over the 8-ball picture 
   - Step 3: Click on it to return your fortune. 
 
+## Directions to run tests
+ - Step 1: Run `npm install` in the project directory
+ - Step 2: Run `npm start` to start an HTTP server on `localhost:8080` to serve project files
+ - Step 3: Run `npm test` to run the test suites
+
 ## Features: 
 ### Input
 - A text box to input your questions
