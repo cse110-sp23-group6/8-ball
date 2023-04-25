@@ -243,3 +243,7 @@ window.onload = function () {
         })
     }
 }
+
+module.exports = {
+    responses: responses
+}
